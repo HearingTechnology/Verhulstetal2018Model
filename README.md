@@ -44,6 +44,7 @@ Keep the stimuli short! 100-200ms stimuli work well. The model does not crash fo
 Because all the model code is written in python, it is possible to run the model without Matlab. Matlab is only used here to interface with the model: design the stimuli, set the parameters and plot the results. 
 
 5. MAKING MODIFICATIONS BEYOND THE STANDARD PARAMETERS
+
 5.1 The "Poles" folder has a whole range of auditory profiles (cochlear gain loss) that can be simulated.
 Each folder corresponds to a specific audiogram shape: 
 FlatXX refers to a fixed dB HL loss across CF.
@@ -63,8 +64,8 @@ note that the "compression_slope=0.4" parameter in line 145 is NOT active (it ca
 5.4 The stimulus level at which the nonlinearity kicks (i.e. the vbm at which compression starts, vbm,30) cannot be changed easily, the vbm thresholds need to be derived from simulations using linear models. It is currently set to a fixed BM vel/disp value corresponding to 30-dB pure-tone response at 1 kHz (see line 415,416).
 
 5.5 Simulating reflection-source emissions should be done in two simulations:
-1. put the irregularities on (has reflection-source and distortion-source)
-2. put the irregularities off (has distortion-source)
+a) put the irregularities on (has reflection-source and distortion-source)
+b) put the irregularities off (has distortion-source)
 subtract the emission waveforms.
 
 
