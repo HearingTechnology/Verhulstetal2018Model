@@ -6,9 +6,9 @@ Hearing Research XXX, pX-X
 
 The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) and is licensed under the UGent acadamic license (see details in license file that is part of this repository). The Verhulstetal2018Model consists of the following files: tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder.  
 
-%%%%%%%%%%%%%%%%%%%%%
+#####################
 How to run the model
-%%%%%%%%%%%%%%%%%%%%%
+#####################
 
 1. INSTALL NUMPY AND SCIPY (anaconda), check whether you should install 32 or 64 bit!
 The model works on python 2.7 and also on 3.6 (with some future warnings)
@@ -16,23 +16,23 @@ verify with some simple code or the "pyversion" command whether python can
 be called from the Matlab command line (check the internet for examples)
 
 2. COMPILE THE tridiag.so file (i.e. the tridiagonal matrix solver part of the cochlear mechanics)
-%for mac:
+#for mac:
 open a terminal, go to the model folder (cd /...) and type
 gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
 
-%for ubuntu:
+#for ubuntu:
 open a terminal, go to the model folder and type
 gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
 
-%for windows:
-%very complicated procedure, but not impossible..(good luck)
-%install gcc via cygwin (make sure you download the correct 32/64 bit version)
-%the following installation guide was really helpful:
-%http://preshing.com/20141108/how-to-install-the-latest-gcc-on-windows/
-%after gcc is installed
-%go via the cygwin terminal to the model-folder
-%type gcc --version (to check if gcc is installed)
-%Try to compile the file..
+#for windows:
+very complicated procedure, but not impossible..(good luck)
+install gcc via cygwin (make sure you download the correct 32/64 bit version)
+the following installation guide was really helpful:
+http://preshing.com/20141108/how-to-install-the-latest-gcc-on-windows/
+after gcc is installed
+go via the cygwin terminal to the model-folder
+type gcc --version (to check if gcc is installed)
+Try to compile the file..
 
 3. RUN THE MATLAB SCRIPT: examplesimulation.m
 When you run the model and everything works: "running human auditory model 2018: Verhulst, Altoe, Vasilkov" printed is in the command window. 
@@ -71,7 +71,7 @@ Happy Modeling!
 Sarah
 
 
-%%% References 
+#References 
 Please cite the 2018 Hearing Research paper and other relevant papers when you use the model (or parts of it) for your research. Additional references with information on model specifics and earlier implementations can be found here:
 
 Altoè A, Pulkki V, Verhulst S. (2018) The effects of the activation of the inner-hair-cell basolateral K+ channels on auditory nerve responses. Hearing Research, XXX
