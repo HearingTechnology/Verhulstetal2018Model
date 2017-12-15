@@ -16,15 +16,15 @@ verify with some simple code or the "pyversion" command whether python can
 be called from the Matlab command line (check the internet for examples)
 
 2. COMPILE THE tridiag.so file (i.e. the tridiagonal matrix solver part of the cochlear mechanics)
-#for mac:
+a) for mac:
 open a terminal, go to the model folder (cd /...) and type
 gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
 
-#for ubuntu:
+b) for ubuntu:
 open a terminal, go to the model folder and type
 gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
 
-#for windows:
+c) for windows:
 very complicated procedure, but not impossible..(good luck)
 install gcc via cygwin (make sure you download the correct 32/64 bit version)
 the following installation guide was really helpful:
@@ -71,7 +71,10 @@ Happy Modeling!
 Sarah
 
 
-#References 
+###########
+References
+###########
+
 Please cite the 2018 Hearing Research paper and other relevant papers when you use the model (or parts of it) for your research. Additional references with information on model specifics and earlier implementations can be found here:
 
 Altoè A, Pulkki V, Verhulst S. (2018) The effects of the activation of the inner-hair-cell basolateral K+ channels on auditory nerve responses. Hearing Research, XXX
