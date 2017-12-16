@@ -35,35 +35,39 @@ go via the cygwin terminal to the model-folder
 type gcc --version (to check if gcc is installed)
 Try to compile the file..
 
-3. RUN THE MATLAB SCRIPT: examplesimulation.m
+3. Unzip the "Poles" folder
+
+4. RUN THE MATLAB SCRIPT: ExampleSimulation.m
 When you run the model and everything works: "running human auditory model 2018: Verhulst, Altoe, Vasilkov" printed is in the command window. 
 Depending on the number of CPU cores you have, you can usually run 6-10 stimuli at once (i.e., size of the stim vector)
 Keep the stimuli short! 100-200ms stimuli work well. The model does not crash for long stimuli, but it may take very long before it is ready. If you want to run speech, please start with shorter segments first and find your optimal approach. Note that you may have to limit the number of parameters you save to optimize disk space, if you run long simulations.  
 
-4. NOTE TO PYTHON FANS
+5. RUN THE MATLAB SCRIPT: ExampleAnalysis.m
+
+6. NOTE TO PYTHON FANS
 Because all the model code is written in python, it is possible to run the model without Matlab. Matlab is only used here to interface with the model: design the stimuli, set the parameters and plot the results. 
 
-5. MAKING MODIFICATIONS BEYOND THE STANDARD PARAMETERS
+7. MAKING MODIFICATIONS BEYOND THE STANDARD PARAMETERS
 
-5.1 The "Poles" folder has a whole range of auditory profiles (cochlear gain loss) that can be simulated.
+7.1 The "Poles" folder has a whole range of auditory profiles (cochlear gain loss) that can be simulated.
 Each folder corresponds to a specific audiogram shape: 
 FlatXX refers to a fixed dB HL loss across CF.
 SlopeXX refers to a sloping HF loss starting from 1 kHz and XX corresponds to the loss in dB HL at 8 kHz.
 SlopeXX_Y refers to a sloping HF loss from 1 kHz and a fixed Y dB HL loss for CFs below 1 kHz. 
 In each folder, you find the alpha*,A values that should be loaded into the model (i.e. the StartingPoles.dat file for the considered HL profile). The audiogram shape can be seen by plotting the first and second line of the profile.txt file against eachother. The Poles.mat file has the HI starting poles and corresponding QERBs across the frequencies in fres as well as the the NH reference poles and QERBs. 
 
-5.2 The middle-ear filter parameters can be changed in line 226-227 of cochlear_model2018.py
+7.2 The middle-ear filter parameters can be changed in line 226-227 of cochlear_model2018.py
 
-5.3 The cochlear compression slope 
+7.3 The cochlear compression slope 
 can be changed in line 414 of cochlear_model2018.py by changing the 0.31 to another value
 self.PoleE = np.zeros_like(self.x)+0.31 #saturating pole
 note that the "compression_slope=0.4" parameter in line 145 is NOT active (it came from earlier version)
 
-5.4 The cochlear irregularity percentage (for reflection-source emissions) can be changed in lines 146 and 147 in cochlear_model2018.py by modifying the percentage=0.05 (reflection-source strenght) and kneevar=1 (horizontal random dB shift of vbm,30 compresssion kneepoint)
+7.4 The cochlear irregularity percentage (for reflection-source emissions) can be changed in lines 146 and 147 in cochlear_model2018.py by modifying the percentage=0.05 (reflection-source strenght) and kneevar=1 (horizontal random dB shift of vbm,30 compresssion kneepoint)
 
-5.4 The stimulus level at which the nonlinearity kicks (i.e. the vbm at which compression starts, vbm,30) cannot be changed easily, the vbm thresholds need to be derived from simulations using linear models. It is currently set to a fixed BM vel/disp value corresponding to 30-dB pure-tone response at 1 kHz (see line 415,416).
+7.4 The stimulus level at which the nonlinearity kicks (i.e. the vbm at which compression starts, vbm,30) cannot be changed easily, the vbm thresholds need to be derived from simulations using linear models. It is currently set to a fixed BM vel/disp value corresponding to 30-dB pure-tone response at 1 kHz (see line 415,416).
 
-5.5 Simulating reflection-source emissions should be done in two simulations:
+7.5 Simulating reflection-source emissions should be done in two simulations:
 a) put the irregularities on (has reflection-source and distortion-source)
 b) put the irregularities off (has distortion-source)
 subtract the emission waveforms.
@@ -71,6 +75,7 @@ subtract the emission waveforms.
 
 Happy Modeling!
 Sarah
+
 
 
 ###########
