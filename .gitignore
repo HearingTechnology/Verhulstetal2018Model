@@ -1,3 +1,5 @@
 *.mat
 *.np
 *.pyc
+*.dll
+*.so
