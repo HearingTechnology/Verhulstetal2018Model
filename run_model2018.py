@@ -85,72 +85,90 @@ def solve_one_cochlea(model): #definition here, to have all the parameter implic
     Vm_resampled[0:5,:]=Vm[0,0]; #resting value to eliminate noise from decimate
     Fs_res=Fs/dec_factor
 #    print(np.shape(coch.Vsolution),np.shape(Vm_resampled))
+
+    fname = output_folder+"cf"+str(ii+1)+".mat"
+    mdict = {'cf':coch.cf}
+    sio.savemat(fname,mdict)
+
     if 'v' in storeflag:
-        f=open(output_folder+"v"+str(ii+1)+".np",'w')
-        coch.Vsolution.tofile(f)
-        f.close()
+        fname = output_folder+"v"+str(ii+1)+".mat"
+        mdict = {'Vsolution':coch.Vsolution}
+        sio.savemat(fname,mdict)
+
     if 'y' in storeflag:
-        f=open(output_folder+"y"+str(ii+1)+".np",'w')
-        coch.Ysolution.tofile(f)
-        f.close()
+        fname = output_folder+"y"+str(ii+1)+".mat"
+        mdict = {'Ysolution':coch.Ysolution}
+        sio.savemat(fname,mdict)
+
     if 'i' in storeflag:
-        f=open(output_folder+"ihc"+str(ii+1)+".np",'w')
-        Vm.tofile(f)
-        f.close()
+        fname = output_folder+"ihc"+str(ii+1)+".mat"
+        mdict = {'Vm':Vm}
+        sio.savemat(fname,mdict)
+
     if 'h' in storeflag or 'b' in storeflag:
         anfH=anf.auditory_nerve_fiber(Vm_resampled,Fs_res,2)*Fs_res
 #print(np.shape(coch.Vsolution),np.shape(Vm_resampled),np.shape(anfH))
 
     if 'h' in storeflag:
-        f=open(output_folder+"anfH"+str(ii+1)+".np",'w')
-        anfH.tofile(f)
-        f.close()
+        fname = output_folder+"anfH"+str(ii+1)+".mat"
+        mdict = {'anfH':anfH}
+        sio.savemat(fname,mdict)
+
     if 'm' in storeflag or 'b' in storeflag:
         anfM=anf.auditory_nerve_fiber(Vm_resampled,Fs_res,1)*Fs_res
+    
     if 'm' in storeflag:
-        f=open(output_folder+"anfM"+str(ii+1)+".np",'w')
-        anfM.tofile(f)
-        f.close()
+        fname = output_folder+"anfM"+str(ii+1)+".mat"
+        mdict = {'anfM':anfM}
+        sio.savemat(fname,mdict)
+
     if 'l' in storeflag or 'b' in storeflag:
         anfL=anf.auditory_nerve_fiber(Vm_resampled,Fs_res,0)*Fs_res
+    
     if 'l' in storeflag:
-        f=open(output_folder+"anfL"+str(ii+1)+".np",'w')
-        anfL.tofile(f)
-        f.close()
+        fname = output_folder+"anfL"+str(ii+1)+".mat"
+        mdict = {'anfL':anfL}
+        sio.savemat(fname,mdict)
+    
     if 'e' in storeflag:
-        f=open(output_folder+"emission"+str(ii+1)+".np",'w')
-        coch.oto_emission.tofile(f)
-        f.close()
+        fname = output_folder+"emission"+str(ii+1)+".mat"
+        mdict = {'oto_emission':coch.oto_emission}
+        sio.savemat(fname,mdict)
+
     if 'b' in storeflag or 'w' in storeflag:
         cn,anSummed=nuclei.cochlearNuclei(anfH,anfM,anfL,numH,numM,numL,Fs_res)
         ic=nuclei.inferiorColliculus(cn,Fs_res)
+        
         if 'b' in storeflag:
-            f=open(output_folder+"cn"+str(ii+1)+".np",'w')
-            cn.tofile(f)
-            f.close()
-            f=open(output_folder+"AN"+str(ii+1)+".np",'w')
-            anSummed.tofile(f)
-            f.close()
-            f=open(output_folder+"ic"+str(ii+1)+".np",'w')
-            ic.tofile(f)
-            f.close()
+            fname = output_folder+"cn"+str(ii+1)+".mat"
+            mdict = {'cn':cn}
+            sio.savemat(fname,mdict)
+            
+            fname = output_folder+"AN"+str(ii+1)+".mat"
+            mdict = {'anSummed':anSummed}
+            sio.savemat(fname,mdict)
+            
+            fname = output_folder+"ic"+str(ii+1)+".mat"
+            mdict = {'ic':ic}
+            sio.savemat(fname,mdict)
+
         if 'w' in storeflag:
+            
             w1=nuclei.M1*np.sum(anSummed,axis=1);
             w3=nuclei.M3*np.sum(cn,axis=1)
             w5=nuclei.M5*np.sum(ic,axis=1)
-            f=open(output_folder+"1w"+str(ii+1)+".np",'w')
-            w1.tofile(f)
-            f.close()
-            f=open(output_folder+"3w"+str(ii+1)+".np",'w')
-            w3.tofile(f)
-            f.close()
-            f=open(output_folder+"5w"+str(ii+1)+".np",'w')
-            w5.tofile(f)
-            f.close()
-    f=open(output_folder+"cf"+str(ii+1)+".np",'w')
-    coch.cf.tofile(f)
-    f.close()
+            
+            fname = output_folder+"1w"+str(ii+1)+".mat"
+            mdict = {'w1':w1}
+            sio.savemat(fname,mdict)
+            
+            fname = output_folder+"3w"+str(ii+1)+".mat"
+            mdict = {'w3':w3}
+            sio.savemat(fname,mdict)
 
+            fname = output_folder+"5w"+str(ii+1)+".mat"
+            mdict = {'w5':w5}
+            sio.savemat(fname,mdict)
 
 
 if __name__ == "__main__":
