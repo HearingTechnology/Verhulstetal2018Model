@@ -125,103 +125,98 @@ save('input.mat','stim','Fs','channels','subject','sheraPo','irregularities','pr
 system('python run_model2018.py');
 
 cd(data_folder);
+
 for i=1:channels
+
     p=length(stim(i,:));
     p2=ceil(length(stim(i,:))/DECIMATION);
-    if(strfind(storeflag,'v'))
-        fname=strcat('v',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p],'double')';
-        output(i).v=tmp;
-        fclose(f);
+    
+    fname = strcat('cf',int2str(i),'.mat');
+    tmp = load(fname,'cf');
+    output(i).cf = tmp.cf;
+
+    if strfind(storeflag,'v')
+        fname = strcat('v',int2str(i),'.mat');
+        tmp = load(fname,'Vsolution');
+        output(i).v = tmp.Vsolution;
     end
-    if(strfind(storeflag,'y'))
-        fname=strcat('y',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p],'double')';
-        output(i).y=tmp;
-        fclose(f);
+
+    if strfind(storeflag,'y')
+        fname = strcat('y',int2str(i),'.mat');
+        tmp = load(fname,'Ysolution');
+        output(i).y = tmp.Ysolution;
     end
-    if(strfind(storeflag,'e'))
-        fname=strcat('emission',int2str(i),'.np');
-        f=fopen(fname,'r');
-        output(i).e=fread(f,[p,1],'double');
-        fclose(f);
+    
+    if strfind(storeflag,'e')
+        fname = strcat('emission',int2str(i),'.mat');
+        tmp = load(fname,'oto_emission');
+        output(i).e = tmp.oto_emission;
     end
-    fname=strcat('cf',int2str(i),'.np');
-    f=fopen(fname,'r');
-    output(i).cf=fread(f,[l,1],'double');
-    fclose(f);
-    if(strfind(storeflag,'i'))
-        fname=strcat('ihc',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p],'double')';
-        output(i).ihc=tmp;
-        fclose(f);
+
+    if strfind(storeflag,'i')
+        fname = strcat('ihc',int2str(i),'.mat');
+        tmp = load(fname,'Vm');
+        output(i).ihc = tmp.Vm;
     end
-    if(strfind(storeflag,'h'))
-        fname=strcat('anfH',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p2],'double')';
-        output(i).anfH=tmp;
-        fclose(f);
+
+    if strfind(storeflag,'h')
+        fname = strcat('anfH',int2str(i),'.mat');
+        tmp = load(fname,'anfH');
+        output(i).anfH = tmp.anfH;
     end
-    if(strfind(storeflag,'m'))
-        fname=strcat('anfM',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p2],'double')';
-        output(i).anfM=tmp;
-        fclose(f);
+    
+    if strfind(storeflag,'m')
+        fname = strcat('anfM',int2str(i),'.mat');
+        tmp = load(fname,'anfM');
+        output(i).anfM = tmp.anfM;
     end
-    if(strfind(storeflag,'l'))
-        fname=strcat('anfL',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p2],'double')';
-        output(i).anfL=tmp;
-        fclose(f);
+
+    if strfind(storeflag,'l')
+        fname = strcat('anfL',int2str(i),'.mat');
+        tmp = load(fname,'anfL');
+        output(i).anfL = tmp.anfL;
     end
-    if(strfind(storeflag,'b'))
-        fname=strcat('cn',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p2],'double')';
-        output(i).cn=tmp;
-        fclose(f);
-        fname=strcat('ic',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p2],'double')';
-        output(i).ic=tmp;
-        fclose(f);
-        fname=strcat('AN',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[l,p2],'double')';
-        output(i).an_summed=tmp;
-        fclose(f);
+
+    if strfind(storeflag,'b')
+        fname = strcat('cn',int2str(i),'.mat');
+        tmp = load(fname,'cn');
+        output(i).cn = tmp.cn;
+        
+        fname = strcat('ic',int2str(i),'.mat');
+        tmp = load(fname,'ic');
+        output(i).ic = tmp.ic;
+        
+        fname = strcat('AN',int2str(i),'.mat');
+        tmp = load(fname,'anSummed');
+        output(i).an_summed = tmp.anSummed;
     end
-    if(strfind(storeflag,'w'))
-        fname=strcat('3w',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[p2,1],'double')';
-        output(i).w3=tmp;
-        fclose(f);
-        fname=strcat('5w',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[p2,1],'double')';
-        output(i).w5=tmp;
-        fclose(f);
-        fname=strcat('1w',int2str(i),'.np');
-        f=fopen(fname,'r');
-        tmp=fread(f,[p2,1],'double')';
-        output(i).w1=tmp;
-        fclose(f);
+
+    if strfind(storeflag,'w')
+        fname = strcat('1w',int2str(i),'.mat');
+        tmp = load(fname,'w1');
+        output(i).w1 = tmp.w1;
+
+        fname = strcat('3w',int2str(i),'.mat');
+        tmp = load(fname,'w3');
+        output(i).w3 = tmp.w3;
+        
+        fname = strcat('5w',int2str(i),'.mat');
+        tmp = load(fname,'w5');
+        output(i).w5 = tmp.w5;
     end
+
     output(i).fs_abr=fs/DECIMATION;
     output(i).fs_an=fs/DECIMATION;
     output(i).fs_bm=fs;
     output(i).fs_ihc=fs;
 end
+
 if clean==1
-    delete *.np
+    delete *.mat
 end
+save('input.mat','stim','Fs','channels','subject','sheraPo','irregularities','probes',...
+    'sectionsNo','data_folder','storeflag','IrrPct','non_linear_type','nH','nM','nL','-v7');
+
 cd(act_path);
 
 %The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
