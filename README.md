@@ -1,10 +1,10 @@
 # Verhulstetal2018Model
 The model code for the Verhulst, Altoè, Vasilkov 2018 Hearing Research publication:
 Computational modeling of the human auditory periphery:
-Auditory-nerve responses, evoked potentials and hearing loss
-Hearing Research XXX, pX-X
+Auditory-nerve responses, evoked potentials and hearing loss.
+*Hearing Research* 360, 55-75. (found in 'doc/' folder)
 
-The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) and is licensed under the UGent acadamic license (see details in license file that is part of this repository). The Verhulstetal2018Model consists of the following files: tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder.  
+The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) and is licensed under the UGent acadamic license (see details in license file that is part of this repository). The Verhulstetal2018Model consists of the following files: tridiag.so, cochlea_utils.c, build.bat, build.sh, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder.
 
 #####################
 How to run the model
@@ -17,23 +17,28 @@ be called from the Matlab command line (check the internet for examples)
 
 2. COMPILE THE tridiag.so file (i.e. the tridiagonal matrix solver part of the cochlear mechanics)
 
-2.1 for mac:
-open a terminal, go to the model folder (cd /...) and type
-gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
+    2.1 for mac:
+        
+        open a terminal, go to the model folder (cd /...) and type
+        gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
+        or run build.sh script
 
-2.2 for ubuntu:
-open a terminal, go to the model folder and type
-gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
+    2.2 for ubuntu:
 
-2.3 for windows:
-very complicated procedure, but not impossible..(good luck)
-install gcc via cygwin (make sure you download the correct 32/64 bit version)
-the following installation guide was really helpful:
-http://preshing.com/20141108/how-to-install-the-latest-gcc-on-windows/
-after gcc is installed
-go via the cygwin terminal to the model-folder
-type gcc --version (to check if gcc is installed)
-Try to compile the file..
+        open a terminal, go to the model folder and type
+        gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
+        or run build.sh script
+
+    2.3 for windows:
+        
+        very complicated procedure, but not impossible..(good luck)
+        install gcc via cygwin (make sure you download the correct 32/64 bit version)
+        the following installation guide was really helpful:
+        http://preshing.com/20141108/how-to-install-the-latest-gcc-on-windows/
+        after gcc is installed
+        go via the cygwin terminal to the model-folder
+        type gcc --version (to check if gcc is installed)
+        run build.bat script
 
 3. Unzip the "Poles" folder
 
@@ -54,7 +59,7 @@ Each folder corresponds to a specific audiogram shape:
 FlatXX refers to a fixed dB HL loss across CF.
 SlopeXX refers to a sloping HF loss starting from 1 kHz and XX corresponds to the loss in dB HL at 8 kHz.
 SlopeXX_Y refers to a sloping HF loss from 1 kHz and a fixed Y dB HL loss for CFs below 1 kHz. 
-In each folder, you find the alpha*,A values that should be loaded into the model (i.e. the StartingPoles.dat file for the considered HL profile). The audiogram shape can be seen by plotting the first and second line of the profile.txt file against eachother. The Poles.mat file has the HI starting poles and corresponding QERBs across the frequencies in fres as well as the the NH reference poles and QERBs. 
+In each folder, you find the alpha\*,A values that should be loaded into the model (i.e. the StartingPoles.dat file for the considered HL profile). The audiogram shape can be seen by plotting the first and second line of the profile.txt file against eachother. The Poles.mat file has the HI starting poles and corresponding QERBs across the frequencies in fres as well as the the NH reference poles and QERBs. 
 
 7.2 The middle-ear filter parameters can be changed in line 226-227 of cochlear_model2018.py
 
