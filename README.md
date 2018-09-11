@@ -15,19 +15,19 @@ The model works on python 2.7 and also on 3.6 (with some future warnings)
 verify with some simple code or the "pyversion" command whether python can
 be called from the Matlab command line (check the internet for examples)
 
-2. COMPILE THE tridiag.so file (i.e. the tridiagonal matrix solver part of the cochlear mechanics)
+2. COMPILE THE tridiag.so or tridiag.dll (in case you use Windows) file, i.e. the tridiagonal matrix solver part of the cochlear mechanics
 
     2.1 for mac:
         
         open a terminal, go to the model folder (cd /...) and type
         gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
-        or run build.sh script
+        OR run build.sh script
 
     2.2 for ubuntu:
 
         open a terminal, go to the model folder and type
         gcc -shared -fpic -O3 -ffast-math -o tridiag.so cochlea_utils.c
-        or run build.sh script
+        OR run build.sh script
 
     2.3 for windows:
         
@@ -38,7 +38,8 @@ be called from the Matlab command line (check the internet for examples)
         after gcc is installed
         go via the cygwin terminal to the model-folder
         type gcc --version (to check if gcc is installed)
-        run build.bat script
+        gcc -shared -fpic -O3 -ffast-math -o tridiag.dll cochlea_utils.c 
+        OR run build.bat script
 
 3. Unzip the "Poles" folder
 
