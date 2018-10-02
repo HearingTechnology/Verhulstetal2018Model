@@ -80,9 +80,9 @@ title(['CF of ',num2str(round(CF(No))),' Hz'])
 xlim([0 20]),xlabel('Time [ms]'),ylabel('HSR fiber [spikes/s]')
 legend(num2str(L')),legend('boxoff')
 subplot(3,2,3),plot(1000*t,MSR)
-xlim([0 20]),xlabel('Time [ms]'),ylabel('HSR fiber [spikes/s]')
+xlim([0 20]),xlabel('Time [ms]'),ylabel('MSR fiber [spikes/s]')
 subplot(3,2,5),plot(1000*t,LSR)
-xlim([0 20]),xlabel('Time [ms]'),ylabel('HSR fiber [spikes/s]')
+xlim([0 20]),xlabel('Time [ms]'),ylabel('LSR fiber [spikes/s]')
 
 subplot(3,2,2),plot(1000*t,AN)
 title(['CF of ',num2str(round(CF(No))),' Hz'])
@@ -106,7 +106,7 @@ xlim([0 20]),xlabel('Time [ms]'),ylabel('W-5 [\muV]')
 subplot(4,1,4),plot(1000*t,1e6*EFR)
 xlim([0 20]),xlabel('Time [ms]'),ylabel('EFR [\muV]')
 
-%The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
+%The model code and interface was written by Alessandro AltoÃ¨ and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
 %and is licensed under the UGent acadamic license (see details in license file that is part of this repository). 
 %The Verhulstetal2018Model consists of the following files: 
 %tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder. 
