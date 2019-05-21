@@ -120,4 +120,6 @@ Verhulst S, Dau T, Shera CA. (2012). Nonlinear time-domain cochlear model for tr
 Saremi A, Beutelmann R, Dietz M, Ashida G, Kretzberg J and Verhulst S (2016). A comparative study of seven human cochlear filter models. The Journal of the Acoustical Society of America, 140(3), pp.1618-1634.
 => Shows cochlear mechanical responses to different stimuli and different filterbank models
 
-![Image](doc/Model_Overview.png)
+<p align="center">
+    <img src="doc/Model_Overview.png" alt="Model Overview" height="50%" width="50%">
+</p>
