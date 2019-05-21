@@ -34,12 +34,11 @@ be called from the Matlab command line (check the internet for examples)
     2.3 for windows:
         
         Download the installer of the native GCC compiler from the MinGW project: https://sourceforge.net/projects/mingw-w64/
-        In the installation window choose the desired compiler version (e.g. the latest one) as well as the computer                        architecture (i686 for 32-bit OS or x86_64 for 64-bit OS). Install the compiler.
-        After the installation is complete 
-        and run the migw-w64.bat file from the installation directory (e.g. C:\Program Files\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0).
+        In the installation window choose the desired compiler version (e.g. the latest one) as well as the computer architecture (i686 for 32-bit OS or x86_64 for 64-bit OS). Install the compiler.
+        After the installation is complete, run the migw-w64.bat file from the installation directory (e.g. C:\Program Files\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0).
         Via the terminal go to the model’s folder.
         Run the command:
-        type gcc --version (to check if gcc is installed)
+        gcc --version (to check if gcc was successfully installed)
         gcc -shared -fpic -O3 -ffast-math -o tridiag.dll cochlea_utils.c
         OR run build.bat script
         the following installation guide was really helpful:
