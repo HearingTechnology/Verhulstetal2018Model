@@ -32,7 +32,7 @@ be called from the MATLAB command line (check the internet for examples)
     2.2 for windows:
         
         The native GCC compiler from the MinGW project needs to be installed on a Windows machine. It can be downloaded from here: https://sourceforge.net/projects/mingw-w64/ (other choices such as cygwin can also work)
-        In the installation window choose the desired compiler version (e.g. the latest one), the computer architecture (i686 for 32-bit OS or x86_64 for 64-bit OS) and win32 for the threads option. Install the compiler.
+        In the installation window choose the desired compiler version (e.g. the latest one) and the computer architecture (i686 for 32-bit OS or x86_64 for 64-bit OS). Install the compiler.
         After the installation is complete, run the migw-w64.bat file from the installation directory (e.g. C:\Program Files\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\).
         Via the terminal go to the model’s folder.
         Run the command:
@@ -49,7 +49,7 @@ Keep the stimuli short! 100-200ms stimuli work well. The model does not crash fo
 
 5. RUN THE MATLAB SCRIPT: ExampleAnalysis.m
 
-6. NOTE TO PYTHON FANS
+6. NOTE TO PYTHON FANS:
 Because all the model code is written in python, it is possible to run the model without MATLAB. MATLAB is only used here to interface with the model: design the stimuli, set the parameters and plot the results. 
 
 7. MAKING MODIFICATIONS BEYOND THE STANDARD PARAMETERS
@@ -79,6 +79,7 @@ Because all the model code is written in python, it is possible to run the model
 
 
 Happy Modeling!
+
 Sarah and the Hearing Technology group
 
 
