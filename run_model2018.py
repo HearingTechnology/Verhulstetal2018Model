@@ -64,7 +64,7 @@ nl=np.array(par['non_linear_type'])
 #print(sheraPo)
 irr_on=np.array(par['irregularities'])
 d=len(stim[0].transpose())
-print("running human auditory model 2018: Verhulst, Altoe, Vasilkov")
+print("running human auditory model 2018 (version 1.2): Verhulst, Altoe, Vasilkov")
 sig=stim
 
 cochlear_list=[ [cochlea_model(),sig[i],irr_on[0][i],i] for i in range(channels)]

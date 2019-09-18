@@ -4,11 +4,11 @@ clear all;
 %this file runs an example simulation for a click stimulus of different
 %stimulus levels
 
-L=[0 10 20 30 40 50 60 70 80 90 100];
-fs=100e3;
-p0=2e-5;
-dur=50e-3;
-t=(0:1/fs:dur);
+L  = [0 10 20 30 40 50 60 70 80 90 100];
+fs = 100e3;
+p0 = 2e-5;
+dur= 50e-3;
+t  = (0:1/fs:dur);
 click_duration=10; % 100 us click
 stim=zeros(numel(L),length(t)); %the simulation runs as long as the stimulus
 
@@ -51,20 +51,23 @@ sheraP=load('StartingPoles.dat');
     % b=summed AN responses for each CF as well as CN and IC responses 
     % w=population response waves I, III, V
     
-% to store all channels (1000)
- output=model2018(stim,fs,'all',1,'evihmlbw',1,sheraP,0.05,'vel',13,3,3,1,[pwd(),'/']);
-% to store half of the channels (500)
+%%% to store all channels (1000), uncomment the next line:
+% output=model2018(stim,fs,'all',1,'evihmlbw',1,sheraP,0.05,'vel',13,3,3,1,[pwd() '/']);
+
+%%% to store half of the channels (500), uncomment the next line:
 % output=model2018(stim,fs,'half',1,'evihmlbw',1,sheraP,0.05,'vel',13*ones(500,1),3,3,1,[pwd(),'/']);
-%store only the ABR channels: CFs between 112 Hz and 12 kHz
-%output=model2018(stim,fs,'abr',1,'evihmlbw',1,sheraP,0.05,'vel',13,3,3,1,[pwd(),'/']);
+
+%%% store only the ABR channels: CFs between 112 Hz and 12 kHz:
+output=model2018(stim,fs,'abr',1,'evihmlbw',1,sheraP,0.05,'vel',13,3,3,1,[pwd(),'/']);
 
 save('Simulations.mat','output','-v7.3')
 
 
 
 
-%The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
-%and is licensed under the UGent acadamic license (see details in license file that is part of this repository). 
-%The Verhulstetal2018Model consists of the following files: 
-%tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder. 
- 
+% The model code and interface was written by Alessandro Altoï¿½ and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
+% and is licensed under the UGent acadamic license (see details in license file that is part of this repository). 
+% The Verhulstetal2018Model consists of the following files: 
+% tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder. 
+%
+% See the short release note for the model version 1.2 which can be found in the doc/ folder.

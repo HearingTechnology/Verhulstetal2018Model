@@ -106,10 +106,10 @@ xlim([0 20]),xlabel('Time [ms]'),ylabel('W-5 [\muV]')
 subplot(4,1,4),plot(1000*t,1e6*EFR)
 xlim([0 20]),xlabel('Time [ms]'),ylabel('EFR [\muV]')
 
-%The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
-%and is licensed under the UGent acadamic license (see details in license file that is part of this repository). 
-%The Verhulstetal2018Model consists of the following files: 
-%tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder. 
- 
-
+% The model code and interface was written by Alessandro Altoè and Sarah Verhulst (copyright 2012,2014,2015,2016,2018) 
+% and is licensed under the UGent acadamic license (see details in license file that is part of this repository). 
+% The Verhulstetal2018Model consists of the following files: 
+% tridiag.so, cochlea_utils.c, run_model2018.py, model2018.m, cochlear_model2017.py, inner_hair_cell2018.py, auditory_nerve2017.py, ic_cn2017.py, ExampleSimulation.m, ExampleAnalysis.m, the HI profiles in the Poles folder. 
+%
+% See the short release note for the model version 1.2 which can be found in the doc/ folder.
 
