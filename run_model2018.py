@@ -19,7 +19,7 @@ import ic_cn2018 as nuclei
 warnings.filterwarnings("ignore")
 
 par=sio.loadmat('input.mat')
-probes=np.array(par['probes']) 
+probes=np.array(par['probes'])
 storeflag_in=np.array(par['storeflag'],dtype=str)
 storeflag=storeflag_in[0]
 probe_points=probes
@@ -116,7 +116,7 @@ def solve_one_cochlea(model): #definition here, to have all the parameter implic
 
     if 'm' in storeflag or 'b' in storeflag:
         anfM=anf.auditory_nerve_fiber(Vm_resampled,Fs_res,1)*Fs_res
-    
+
     if 'm' in storeflag:
         fname = output_folder+"anfM"+str(ii+1)+".mat"
         mdict = {'anfM':anfM}
@@ -124,12 +124,12 @@ def solve_one_cochlea(model): #definition here, to have all the parameter implic
 
     if 'l' in storeflag or 'b' in storeflag:
         anfL=anf.auditory_nerve_fiber(Vm_resampled,Fs_res,0)*Fs_res
-    
+
     if 'l' in storeflag:
         fname = output_folder+"anfL"+str(ii+1)+".mat"
         mdict = {'anfL':anfL}
         sio.savemat(fname,mdict)
-    
+
     if 'e' in storeflag:
         fname = output_folder+"emission"+str(ii+1)+".mat"
         mdict = {'oto_emission':coch.oto_emission}
@@ -138,30 +138,30 @@ def solve_one_cochlea(model): #definition here, to have all the parameter implic
     if 'b' in storeflag or 'w' in storeflag:
         cn,anSummed=nuclei.cochlearNuclei(anfH,anfM,anfL,numH,numM,numL,Fs_res)
         ic=nuclei.inferiorColliculus(cn,Fs_res)
-        
+
         if 'b' in storeflag:
             fname = output_folder+"cn"+str(ii+1)+".mat"
             mdict = {'cn':cn}
             sio.savemat(fname,mdict)
-            
+
             fname = output_folder+"AN"+str(ii+1)+".mat"
             mdict = {'anSummed':anSummed}
             sio.savemat(fname,mdict)
-            
+
             fname = output_folder+"ic"+str(ii+1)+".mat"
             mdict = {'ic':ic}
             sio.savemat(fname,mdict)
 
         if 'w' in storeflag:
-            
+
             w1=nuclei.M1*np.sum(anSummed,axis=1);
             w3=nuclei.M3*np.sum(cn,axis=1)
             w5=nuclei.M5*np.sum(ic,axis=1)
-            
+
             fname = output_folder+"1w"+str(ii+1)+".mat"
             mdict = {'w1':w1}
             sio.savemat(fname,mdict)
-            
+
             fname = output_folder+"3w"+str(ii+1)+".mat"
             mdict = {'w3':w3}
             sio.savemat(fname,mdict)
