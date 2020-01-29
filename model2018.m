@@ -128,11 +128,11 @@ if(idx==2) %transpose it (python C-style row major order)
 end
 stim=sign;
 
-if(isstr(fc) && strcmp(fc,'all')) %if probing all sections 1001 output (1000 sections plus the middle ear)
+if(ischar(fc) && strcmp(fc,'all')) %if probing all sections 1001 output (1000 sections plus the middle ear)
     l=sectionsNo;
-elseif(isstr(fc) && strcmp(fc,'half')) %if probing half sections sections 1001 output (1000 sections plus the middle ear)
+elseif(ischar(fc) && strcmp(fc,'half')) %if probing half sections sections 1001 output (1000 sections plus the middle ear)
     l=sectionsNo/2;
-elseif(isstr(fc) && strcmp(fc,'abr')) %if probing half sections sections 1001 output (1000 sections plus the middle ear)
+elseif(ischar(fc) && strcmp(fc,'abr')) %if probing half sections sections 1001 output (1000 sections plus the middle ear)
     l=401;
 else %else pass it as a column vector
     [l,idx]=max(size(fc));

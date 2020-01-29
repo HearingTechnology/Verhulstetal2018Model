@@ -60,7 +60,7 @@ sheraP=load('StartingPoles.dat');
 %%% store only the ABR channels: CFs between 112 Hz and 12 kHz:
 output=model2018(stim,fs,'abr',1,'evihmlbw',1,sheraP,0.05,'vel',13,3,3,1,[pwd(),'/']);
 
-save('Simulations.mat','output','-v7.3')
+save('Simulations.mat','output','-v7')
 
 
 
