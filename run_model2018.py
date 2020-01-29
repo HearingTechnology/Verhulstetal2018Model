@@ -27,7 +27,7 @@ Fs=par['Fs']
 Fs=Fs[0][0]
 stim=par['stim']
 channels=par['channels']
-channels=channels[0][0]
+channels=int(channels[0][0])
 subjectNo=int(par['subject'])
 sectionsNo=int(par['sectionsNo'])
 t_f=(par['data_folder'])
@@ -172,7 +172,6 @@ def solve_one_cochlea(model): #definition here, to have all the parameter implic
 
 
 if __name__ == "__main__":
-    s1=time.clock()
     p=mp.Pool(mp.cpu_count(),maxtasksperchild=1)
     p.map(solve_one_cochlea,cochlear_list)
     p.close()
