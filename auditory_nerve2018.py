@@ -2,7 +2,7 @@ from numpy import *
 from inner_hair_cell2018 import resting_potential, peak_potential
 
 #parameters
-r1=220 #reserve pool max. replenishment rate
+r1=220. #reserve pool max. replenishment rate
 x=700 #RRP replenishment rate (Pangrisc 2010,Chapocnikov 2014)
 M=14 # Max. vesicles in the ready release pool or release sites (reasonable, ref?)
 M2=60 # Max. vesicles in the second pool, fitted parameter

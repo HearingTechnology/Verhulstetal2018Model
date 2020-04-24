@@ -3,7 +3,7 @@ The model code version 1.2 for the Verhulst, Altoè, Vasilkov 2018 Hearing Resea
 Computational modeling of the human auditory periphery: Auditory-nerve responses, evoked potentials and hearing loss. 
 *Hearing Research* 360, 55-75. (found in 'doc/' folder)
 
-A release note Verhulstetal2018-v1.2-short-release-note.pdf is also included in the 'doc/' folder. An extended release note will be uploaded soon. The previous version can be found under the v1.1-master git branch.
+A short and an extended version of the v1.2 release note can be found in the 'doc/' folder. The previous version can be found under the v1.1-master git branch.
 Version 1.2 includes an update of the Inferior Colliculus stage (IC). A minor change was introduced to the cochlear nucleus stage (CN). As a consequence, the scaling constants M1, M3, and M5 (calibrated using the flag 'abr') were also updated. All other model stages remained unchanged.
 
 This work received funding from the European Research Council (ERC) under the Horizon 2020 Research and Innovation Programme (grant agreement No 678120 RobSpear)
