@@ -136,8 +136,26 @@ def solve_one_cochlea(model): #definition here, to have all the parameter implic
         sio.savemat(fname,mdict)
 
     if 'b' in storeflag or 'w' in storeflag:
-        cn,anSummed=nuclei.cochlearNuclei(anfH,anfM,anfL,numH,numM,numL,Fs_res)
-        ic=nuclei.inferiorColliculus(cn,Fs_res)
+        # Going forward I highly recommend that the last two dimensions of the
+        # array be CF x time (i.e., time should be the last dimension). This
+        # will make the code play much more nicely with other Python modules.
+        # Right now we need to transpose the arrays to ensure uniformity with
+        # what the Matlab code expects.
+        anSummed = anf.sumAN(anfH, anfM, anfL, numH, numM, numL)
+
+        # Need to convert from time x CF to CF x time (because the cochlear,
+        # IHC and auditory nerve code has not yet been updated).
+        anSummed = anSummed.T
+        cn = nuclei.cochlearNuclei(anSummed, Fs_res)
+        ic = nuclei.inferiorColliculus(cn, Fs_res)
+
+        # Now, convert from CF x time to time x CF since the Matlab code
+        # expects it in that format. In general, Python and Matlab tend to take
+        # different approaches to the ordering of dimensions due to the Fortran
+        # (Matlab) vs. C (numpy) optimizations.
+        anSUmmed = anSummed.T
+        cn = cn.T
+        ic = ic.T
 
         if 'b' in storeflag:
             fname = output_folder+"cn"+str(ii+1)+".mat"

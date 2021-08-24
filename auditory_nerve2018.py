@@ -94,6 +94,5 @@ def auditory_nerve_fiber(Vm,fs,spont):
     return solution
 
 
-
-
-
+def sumAN(anfH, anfM, anfL, numH, numM, numL):
+    return numL*anfL+numM*anfM+numH*anfH
