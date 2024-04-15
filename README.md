@@ -40,6 +40,15 @@ be called from the MATLAB command line (check the internet for examples)
             gcc -shared -fpic -O3 -ffast-math -o tridiag.dll cochlea_utils.c
         OR run build.bat script
 
+    2.3 For Windows using Windows Subsystem for Linux
+
+        If you already use Windows Subsystem for Linux and have Ubuntu installed, the following will generate a 64-bit dll::
+
+            sudo apt install mingw-w64
+            x86_64-w64-mingw32-gcc -shared -fpic -O3 --fast-math -o tridiag.dll cochlea_utils.c
+
+        For a 32-bit dll, use i686-w64-mingw32-gcc instead.
+
 3. Unzip the "Poles" folder
 
 4. RUN THE MATLAB SCRIPT: ExampleSimulation.m

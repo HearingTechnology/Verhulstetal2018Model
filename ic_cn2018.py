@@ -1,69 +1,50 @@
 import numpy as np
 from scipy import signal
 
-M1=4.2767e-14 
-M3=5.1435e-14 
-M5=13.3093e-14 
+M1 = 4.2767e-14
+M3 = 5.1435e-14
+M5 = 13.3093e-14
 
-def cochlearNuclei(anfH,anfM,anfL,numH,numM,numL,fs):
-    size=len(anfH[0,:])
-    
 
-    TF=19; #total no of fibers on each IHC
-    # HSnormal=13;
-    # MSnormal=3;
-    # LSnormal=3;
+def get_bilinear_filter(fs, tau):
+    '''
+    Calculate filter using bilinear transform
+    '''
+    m = 2 * tau *fs
+    a = (m-1) / (m+1)
+    b = 1.0/(m+1)**2 * np.array([1,2,1])
+    a = np.array([1, -2*a, a**2])
+    return b, a
 
-    Acn=1.5;
-    Scn=0.6;
-    inhibition_delay=int(round(1e-3*fs));
-    Tex=0.5e-3;
-    Tin=2e-3;
 
-    summedAN=numL*anfL+numM*anfM+numH*anfH;
+def delay(x, delay, fs):
+    # Index where inhibition delay begins
+    i_start = int(round(delay * fs))
+    i_end = x.shape[-1] - i_start
 
-    summedAN=summedAN;
-    delayed_inhibition=np.zeros_like(summedAN)
-    delayed_inhibition[inhibition_delay:,:]=summedAN[0:len(summedAN)-inhibition_delay,:]
+    # This is a much faster appraoch than using np.zeros_like as verified by
+    # profiling.
+    delayed = np.empty_like(x)
+    delayed[..., i_start:] = x[..., :i_end]
+    delayed[..., :i_start] = 0
+    return delayed
 
-    #filters obtained with bilinear transform
-    # # Excitatory filter:
-    m = (2*Tex*fs)
-    a = (m-1)/(m+1)
-    bEx = 1.0/(m+1)**2*np.array([1,2,1]); #numerator
-    aEx = np.array([1, -2*a, a**2]); #denominator
 
-    # # Inhibitory filter:
-    m = (2*Tin*fs)
-    a = (m-1)/(m+1)
-    bIncn = 1.0/(m+1)**2*np.array([1, 2, 1]); # numerator
-    aIncn = np.array([1, -2*a, a**2]); # denominator
+def cochlearNuclei(summed_an, fs, Acn=1.5, Scn=0.6, Tex=0.5e-3, Tin=2e-3,
+                   inhibition_delay=1e-3):
+    delayed_inhibition = delay(summed_an, inhibition_delay, fs)
+    bEx, aEx = get_bilinear_filter(fs, Tex)
+    bIn, aIn = get_bilinear_filter(fs, Tin)
+    anEx = signal.lfilter(bEx, aEx, summed_an, axis=-1)
+    anIn = signal.lfilter(bIn, aIn, delayed_inhibition, axis=-1)
+    return Acn * (anEx - Scn * anIn)
 
-    cn=Acn*(signal.lfilter(bEx,aEx,summedAN,axis=0)-Scn*signal.lfilter(bIncn,aIncn,delayed_inhibition,axis=0))
-    return cn,summedAN
-             
-def inferiorColliculus(cn,fs):
-    size=len(cn[0,:])
-    Tex=0.5e-3;
-    Tin=2e-3;
-    Aic=1;
-    Sic=1.5;
-    inhibition_delay=int(round(2e-3*fs));
 
-    delayed_inhibition=np.zeros_like(cn)
-    delayed_inhibition[inhibition_delay:,:]=cn[0:len(cn)-inhibition_delay,:]
-
-    # # Excitatory filter:
-    m = (2*Tex*fs)
-    a = (m-1)/(m+1)
-    bEx=1.0/(m+1)**2*np.array([1,2,1]); #numerator
-    aEx=np.array([1, -2*a, a**2]); #denominator
-
-    # # Inhibitory filter:
-    m = (2*Tin*fs)
-    a = (m-1)/(m+1)
-    bIncn = 1.0/(m+1)**2*np.array([1, 2, 1]); # numerator
-    aIncn = np.array([1, -2*a, a**2]); # denominator
-
-    ic=Aic*(signal.lfilter(bEx,aEx,cn,axis=0)-Sic*signal.lfilter(bIncn,aIncn,delayed_inhibition,axis=0))
-    return ic
+def inferiorColliculus(cn, fs, Aic=1, Sic=1.5, Tex=0.5e-3, Tin=2e-3,
+                       inhibition_delay=2e-3):
+    delayed_inhibition = delay(cn, inhibition_delay, fs)
+    bEx, aEx = get_bilinear_filter(fs, Tex)
+    bIn, aIn = get_bilinear_filter(fs, Tin)
+    cnEx = signal.lfilter(bEx, aEx, cn, axis=-1)
+    cnIn = signal.lfilter(bIn, aIn, delayed_inhibition, axis=-1)
+    return Aic * (cnEx - Sic * cnIn)
