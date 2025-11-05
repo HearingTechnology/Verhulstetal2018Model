@@ -54,26 +54,15 @@ How to run the model
    6.1 RUNNING A SINGLE SIMULATION: ExampleSimulation.py
    This script provides a simple interface to run a single model2018 simulation with a RAM (Rectangular Amplitude Modulation) stimulus.
    It automatically generates the RAM stimulus, loads a poles profile, runs the model, calculates the EFR (Envelope Following Response),
-   and displays/saves the results. Usage:
+   and displays/saves the results.
+
+   Usage:
    python ExampleSimulation.py
 
-   The script can be configured with different parameters:
-   - carrier_freq: Carrier frequency for RAM stimulus (default: 4000 Hz)
-   - poles_profile: Name of poles profile folder in ./Poles/ directory (default: 'Flat00')
-   - show_plots: Whether to show plots (default: True)
-   - save_results: Whether to save results to MAT files (default: True)
-
-   Note: While the script uses RAM stimuli by default (generated via get_RAM_stims.py), any stimulus the user chooses can be used
-   by modifying the script to load or generate custom stimuli.
+   Note: While the script uses RAM stimuli by default (generated via get_RAM_stims.py), any stimulus the user chooses can be used by modifying the script to load or generate custom stimuli.
 
    6.2 ANALYZING A SIMULATION: ExampleAnalysis.py
-   This script provides a simple analysis interface for a single simulation output. It loads the model output and creates
-   comprehensive plots showing:
-   - Otoacoustic emissions (OAE) in time and frequency domain
-   - Basilar membrane velocity (v_bm) and inner hair cell responses (V_IHC)
-   - Single unit responses (HSR, MSR, LSR fibers)
-   - Population responses (AN, CN, IC)
-   - ABR waves (W1, W3, W5) and EFR
+   This script provides a simple analysis interface for a single simulation output. It loads the model output and creates comprehensive plots.
 
    Usage:
    python ExampleAnalysis.py
@@ -81,17 +70,10 @@ How to run the model
    The script expects simulation results to be saved in 'Simulations.mat' (or modify the script to point to your output file).
 
    6.3 GENERATING RAM STIMULI: get_RAM_stims.py
-   This script generates RAM (Rectangular Amplitude Modulation) stimuli for use with the model. The RAM stimuli use a 110 Hz
-   modulation frequency with a 25% duty cycle square wave modulator. The stimuli are calibrated to match the RMS level of
-   a reference SAM tone at 70 dB SPL.
+   This script generates RAM (Rectangular Amplitude Modulation) stimuli for use with the model.
 
    Function signature:
    stim = get_RAM_stims(fs, fRAM)
-
-   where:
-   - fs: Sampling frequency [Hz]
-   - fRAM: Array of carrier frequencies [Hz]
-   - stim: Matrix of generated stimuli [MxN] where M is the number of frequencies and N is the number of samples
 
    6.4 CREATING CUSTOM POLES FROM AUDIOGRAMS: OHC_ind.py
    This script creates custom poles profiles based on individual subject audiogram values. It converts hearing loss data
@@ -101,6 +83,7 @@ How to run the model
    OHC_ind.ohc_ind(name='SubjectName', hl_freqs_hz=[125, 250, 500, ...], hl_db=[0, 5, 10, ...], ...)
 
    The script outputs:
+
    - Poles/`<name>`/profile.txt: Audiogram profile visualization
    - Poles/`<name>`/StartingPoles.dat: Poles data file for use with model2018
 
@@ -112,6 +95,7 @@ How to run the model
    and saving results to CSV. It is particularly useful for batch processing multiple subjects with different audiograms.
 
    The pipeline:
+
    1. Loads audiogram data from an Excel file (or can be configured to use custom data)
    2. Converts each subject's audiogram to poles using OHC_ind
    3. Runs simulations in parallel (user can adjust max_workers parameter to control parallelism)
@@ -120,14 +104,6 @@ How to run the model
 
    Usage:
    python ParallelRAMSimulationsEFR.py
-
-   Configuration options in the script:
-   - excel_path: Path to Excel file with audiogram data
-   - HSR, MSR, LSR: Auditory nerve fiber distributions (can be scalars or frequency-dependent arrays)
-   - num_workers: Number of parallel workers (default: all CPU cores, can be adjusted via max_workers parameter)
-   - fs: Sampling frequency
-   - fRAM: RAM carrier frequencies
-   - output_csv: Output CSV filename
 
    The script uses Python's concurrent.futures for efficient parallel processing and includes progress bars
    for monitoring batch simulations.
